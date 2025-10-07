@@ -1,0 +1,82 @@
+:root{
+  --bg:#ffd6e6;
+  --accent:#ff4d8a;
+  --box:#ffffff;
+}
+
+html,body{
+  height:100%;
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(180deg,var(--bg),#ffeef5);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.container{
+  text-align:center;
+  padding:28px;
+  max-width:720px;
+  width:100%;
+}
+
+.header{
+  color:var(--accent);
+  font-weight:600;
+  font-size:28px;
+  margin-bottom:18px;
+}
+
+.photo-wrap{
+  display:flex;
+  justify-content:center;
+  margin-bottom:22px;
+}
+
+.photo{
+  width:280px;
+  max-width:90%;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.12);
+  border:6px solid rgba(255,255,255,0.6);
+  object-fit:cover;
+  height:280px;
+}
+
+.countdown-box{
+  position:relative;
+  margin:0 auto;
+  width:360px;
+  max-width:90%;
+  padding:28px 20px;
+  background:var(--box);
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.12);
+}
+
+.countdown-title{font-size:18px;color:#333;margin-bottom:10px;}
+.days{font-size:54px;font-weight:700;color:var(--accent);line-height:1;}
+.small{font-size:14px;color:#666;margin-top:8px;}
+
+/* Corazones decorativos */
+.heart{position:absolute;width:28px;height:28px;transform:rotate(-45deg);background:var(--accent);pointer-events:none;}
+.heart::before,.heart::after{content:'';position:absolute;width:28px;height:28px;background:var(--accent);border-radius:50%;}
+.h1{top:-12px;left:-12px;animation:beat 2s infinite;}
+.h2{top:-18px;right:-18px;width:20px;height:20px;transform:rotate(-45deg) scale(.85);}
+.h2::before,.h2::after{width:20px;height:20px;}
+.h3{bottom:-12px;left:-8px;transform:rotate(-40deg) scale(.9);}
+.h4{bottom:-14px;right:-10px;transform:rotate(-20deg) scale(0.8);}
+.h5{top:10px;right:50%;transform:translateX(50%) rotate(-45deg);width:22px;height:22px;}
+.h6{top:50%;left:-14px;transform:translateY(-50%) rotate(-45deg) scale(.85);}
+@keyframes beat{
+  0%{transform:rotate(-45deg) scale(1);opacity:1;}
+  50%{transform:rotate(-45deg) scale(1.15);opacity:0.85;}
+  100%{transform:rotate(-45deg) scale(1);opacity:1;}
+}
+
+@media (max-width:480px){
+  .days{font-size:40px;}
+  .photo{height:200px;}
+  .countdown-box{padding:20px;}
+}
