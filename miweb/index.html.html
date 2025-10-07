@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contador — Nos vemos en...</title>
+
+  <!-- Fuente bonita -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#ffd6e6;        /* fondo general (rosa claro) */
+      --accent:#ff4d8a;    /* color de corazones */
+      --box:#ffffff;       /* color de la caja  */
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:'Poppins',sans-serif;
+      background:linear-gradient(180deg,var(--bg),#ffeef5);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .container{
+      text-align:center;
+      padding:28px;
+      max-width:720px;
+      width:100%;
+    }
+
+    .header{
+      color:var(--accent);
+      font-weight:600;
+      font-size:28px;
+      margin-bottom:18px;
+    }
+
+    .photo-wrap{
+      display:flex;
+      justify-content:center;
+      margin-bottom:22px;
+    }
+
+    .photo{
+      width:280px;
+      max-width:90%;
+      border-radius:20px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.12);
+      border:6px solid rgba(255,255,255,0.6);
+      object-fit:cover;
+      height:280px;
+    }
+
+    .countdown-box{
+      position:relative;
+      margin:0 auto;
+      width:360px;
+      max-width:90%;
+      padding:28px 20px;
+      background:var(--box);
+      border-radius:18px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    .countdown-title{font-size:18px;color:#333;margin-bottom:10px;}
+    .days{font-size:54px;font-weight:700;color:var(--accent);line-height:1;}
+    .small{font-size:14px;color:#666;margin-top:8px;}
+
+    /* Corazones decorativos */
+    .heart{position:absolute;width:28px;height:28px;transform:rotate(-45deg);background:var(--accent);pointer-events:none;}
+    .heart::before,.heart::after{content:'';position:absolute;width:28px;height:28px;background:var(--accent);border-radius:50%;}
+    .heart::before{top:-50%;left:0;}
+    .heart::after{top:0;left:50%;}
+    .h1{top:-12px;left:-12px;animation:beat 2s infinite;}
+    .h2{top:-18px;right:-18px;width:20px;height:20px;transform:rotate(-45deg) scale(.85);}
+    .h2::before,.h2::after{width:20px;height:20px;}
+    .h3{bottom:-12px;left:-8px;transform:rotate(-40deg) scale(.9);}
+    .h4{bottom:-14px;right:-10px;transform:rotate(-20deg) scale(0.8);}
+    .h5{top:10px;right:50%;transform:translateX(50%) rotate(-45deg);width:22px;height:22px;}
+    .h6{top:50%;left:-14px;transform:translateY(-50%) rotate(-45deg) scale(.85);}
+    @keyframes beat{
+      0%{transform:rotate(-45deg) scale(1);opacity:1;}
+      50%{transform:rotate(-45deg) scale(1.15);opacity:0.85;}
+      100%{transform:rotate(-45deg) scale(1);opacity:1;}
+    }
+
+    @media (max-width:480px){
+      .days{font-size:40px;}
+      .photo{height:200px;}
+      .countdown-box{padding:20px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="header">Mi malagueña convak a Leeds 💞</h1>
+
+    <div class="photo-wrap">
+     <img class="photo" src="pareja.jpg" alt="Foto nuestra"
+   onerror="this.src='c:\Users\marti\Desktop\HTML\pareja.jpg';">
+    </div>
+
+    <div id="countdown-box" class="countdown-box">
+      <span class="heart h1"></span>
+      <span class="heart h2"></span>
+      <span class="heart h3"></span>
+      <span class="heart h4"></span>
+      <span class="heart h5"></span>
+      <span class="heart h6"></span>
+
+      <div class="countdown-title">Días que quedan hasta vernos</div>
+      <div id="days" class="days">--</div>
+      <div id="message" class="small">Cargando...</div>
+    </div>
+
+    <p class="small" style="margin-top:18px;">
+    <code>Te Amo con toda mi vida mofletitos</code>
+    </p>
+  </div>
+
+  <script>
+    // === FECHA DE ENCUENTRO ===
+    const TARGET_DATE_ISO = '2025-10-28';
+
+    (function(){
+      const target = new Date(TARGET_DATE_ISO);
+      const daysEl = document.getElementById('days');
+      const msgEl = document.getElementById('message');
+
+      function update(){
+        const now = new Date();
+        const diff = target.getTime() - now.getTime();
+        const msPerDay = 1000*60*60*24;
+        const daysLeft = Math.ceil(diff / msPerDay);
+
+        if (isNaN(target.getTime())) {
+          daysEl.textContent = '--';
+          msgEl.textContent = 'Fecha inválida. Edita la variable TARGET_DATE_ISO.';
+          return;
+        }
+
+        if (diff > 0) {
+          daysEl.textContent = daysLeft + (daysLeft === 1 ? ' día' : ' días');
+          msgEl.textContent = '¡Faltan pocos días! ❤️';
+        } else if (Math.abs(diff) < msPerDay) {
+          daysEl.textContent = '¡Hoy!';
+          msgEl.textContent = '¡TE AMO! 🥰';
+        } else {
+          daysEl.textContent = '0 días';
+          msgEl.textContent = 'La fecha ya pasó';
+        }
+      }
+
+      update();
+      setInterval(update, 60*1000);
+    })();
+  </script>
+</body>
+</html>
+
